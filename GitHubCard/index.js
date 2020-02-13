@@ -35,7 +35,7 @@ const cards = document.querySelector('.cards');
 
 // const followersArray = [];
 
-axios.get('https://api.github.com/users/NataliaBeckstead/followers')
+axios.get('https://api.github.com/users/NataliaBeckstead/followers')  //STRETCH Instead of manually creating a list of followers, do it programmatically. Create a function that requests the followers data from the API after it has received your data and create a card for each of your followers. Hint: you can chain promises.
 .then(response => {
   response.data.forEach(user => {
     axios.get(user.url)
@@ -84,6 +84,8 @@ function cardCreator (user) {
   const following = document.createElement('p');
   const bio = document.createElement('p');
 
+  
+
   card.classList.add('card');
   cardInfo.classList.add('card-info');
   name.classList.add('name');
@@ -109,6 +111,12 @@ function cardCreator (user) {
   cardInfo.appendChild(followers);
   cardInfo.appendChild(following);
   cardInfo.appendChild(bio);
+
+  //calendar
+  const contribution = document.createElement('div');
+  GitHubCalendar(contribution, user.login, { responsive: true });
+  contribution.classList.add('calendar');
+  card.appendChild(contribution);
 
   return card;
 }
